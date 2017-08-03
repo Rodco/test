@@ -1,0 +1,15 @@
+version: 0.1
+phases:
+  install:
+    commands:
+      - echo Installing Mocha...
+      - npm install .
+      - npm install webpack@^3.0.0 -g
+  build:
+    commands:
+      - webpack -p
+      - aws s3 sync ./dist $S3_BUCKET --acl public-read
+artifacts:
+  type: zip
+  files:
+    - package`.json
